@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Табло рахунку</title>
+  <style>
+    body {
+      margin: 0;
+      background: #333;
+      font-family: sans-serif;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .scoreboard {
+      display: flex;
+      gap: 40px;
+      margin-bottom: 20px;
+    }
+
+    .team {
+      background: #666;
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .team h2 {
+      margin: 0;
+      font-size: 2rem;
+    }
+
+    .team .score {
+      font-size: 7rem;
+      font-weight: bold;
+      color: yellow;
+      cursor: pointer;
+    }
+
+    .controls {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    button {
+      font-size: 1rem;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .small-counter {
+      margin-left: 20px;
+      font-size: 1.5rem;
+      background: #444;
+      padding: 5px 10px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="scoreboard">
+    <div class="team" onclick="editName('home')">
+      <h2 id="homeName">Дім</h2>
+      <div class="score" onclick="event.stopPropagation(); increment('home')" id="homeScore">0</div>
+    </div>
+    <div class="team" onclick="editName('guest')">
+      <h2 id="guestName">Гість</h2>
+      <div class="score" onclick="event.stopPropagation(); increment('guest')" id="guestScore">0</div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button onclick="resetScores()">Скинути</button>
+    <label><input type="checkbox" id="showCounter" onchange="toggleRoundCounter()"> Показати раунд</label>
+    <div class="small-counter" id="roundCounter" style="display: none;">
+      Раунд: <span id="round">1</span>
+    </div>
+  </div>
+
+  <script>
+    let scores = { home: 0, guest: 0 };
+    let round = 1;
+
+    function editName(team) {
+      const newName = prompt("Введіть назву команди:", document.getElementById(team + "Name").textContent);
+      if (newName !== null && newName.trim() !== "") {
+        document.getElementById(team + "Name").textContent = newName.trim();
+      }
+    }
+
+    function increment(team) {
+      scores[team]++;
+      document.getElementById(team + "Score").textContent = scores[team];
+    }
+
+    function resetScores() {
+      scores = { home: 0, guest: 0 };
+      round = 1;
+      document.getElementById("homeScore").textContent = 0;
+      document.getElementById("guestScore").textContent = 0;
+      document.getElementById("round").textContent = round;
+    }
+
+    function toggleRoundCounter() {
+      const show = document.getElementById("showCounter").checked;
+      document.getElementById("roundCounter").style.display = show ? "inline-block" : "none";
+    }
+  </script>
+</body>
+</html>
