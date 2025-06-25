@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Табло рахунку</title>
+  <title>Anzeigetafel</title>
   <style>
     body {
       margin: 0;
@@ -70,18 +70,18 @@
 
   <div class="scoreboard">
     <div class="team" onclick="editName('home')">
-      <h2 id="homeName">Дім</h2>
+      <h2 id="homeName">Haus</h2>
       <div class="score" onclick="event.stopPropagation(); increment('home')" id="homeScore">0</div>
     </div>
     <div class="team" onclick="editName('guest')">
-      <h2 id="guestName">Гість</h2>
+      <h2 id="guestName">Gast</h2>
       <div class="score" onclick="event.stopPropagation(); increment('guest')" id="guestScore">0</div>
     </div>
   </div>
 
   <div class="controls">
-    <button onclick="resetScores()">Скинути</button>
-    <label><input type="checkbox" id="showCounter" onchange="toggleRoundCounter()"> Показати раунд</label>
+    <button onclick="resetScores()">Gießen</button>
+    <label><input type="checkbox" id="showCounter" onchange="toggleRoundCounter()"> Show-Runde</label>
     <div class="small-counter" id="roundCounter" style="display: none;">
       Раунд: <span id="round">1</span>
     </div>
